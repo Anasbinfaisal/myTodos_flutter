@@ -4,7 +4,7 @@ This is a basic todos app with functionalities such as add, removing and updatin
 
 ## User Interface
 
-Here are a few images that demonstrate the application funcitonalitieis and UI:
+Here are a few images that demonstrate the application funcitonalities and UI:
 
 <img
   src="/images/IMG_20220920_003903.jpg"
@@ -12,7 +12,7 @@ Here are a few images that demonstrate the application funcitonalitieis and UI:
   title="Splash Screen"
   style="display: inline-block; margin: 0 auto; max-width: 300px">
   
-!(/images/IMG_20220920_003544.jpg)
-!(/images/IMG_20220920_003736.jpg)
-!(/images/IMG_20220920_003824.jpg)
+!['UI Image'](/images/IMG_20220920_003544.jpg)
+!['UI Image'](/images/IMG_20220920_003736.jpg)
+!['UI Image'](/images/IMG_20220920_003824.jpg)
 
