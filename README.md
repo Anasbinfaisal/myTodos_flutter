@@ -15,4 +15,7 @@ Here are a few images that demonstrate the application funcitonalities and UI:
 !['UI Image'](/images/IMG_20220920_003544.jpg )
 !['UI Image'](/images/IMG_20220920_003736.jpg )
 !['UI Image'](/images/IMG_20220920_003824.jpg )
+!['UI Image'](/images/IMG_20220920_003524.jpg )
+!['UI Image'](/images/IMG_20220920_003725.jpg )
+!['UI Image'](/images/IMG_20220920_003809.jpg )
 
