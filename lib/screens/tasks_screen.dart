@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:to_doey/constants.dart';
 import '../components/task_list.dart';
 import '../services/DatabaseHandler.dart';
+import '../services/notification_helper.dart';
 import 'addTask_screen.dart';
-import 'package:to_doey/components/task_tile.dart';
-import 'package:to_doey/models/task.dart';
-import 'package:provider/provider.dart';
-import 'package:to_doey/TaskData.dart';
 
 class TasksScreen extends StatefulWidget {
   @override
@@ -17,10 +13,20 @@ class _TasksScreenState extends State<TasksScreen> {
   late String newTaskText;
   late DatabaseHandler handler;
   int? count = 0;
+  var notifyHelper;
+
+  @override
+  void initState() {
+    notifyHelper = NotificationHelper();
+    notifyHelper.initNotification();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     handler = DatabaseHandler();
+    handler.initializeDB();
     handler.getCount().then((value) {
       setState(() {
         count = value; // Future is completed with a value.
@@ -29,9 +35,15 @@ class _TasksScreenState extends State<TasksScreen> {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
+          // await notifyHelper.displayNotification(
+          //     title: "Drink Water", content: "Time to drink some water!");
+
           showModalBottomSheet(
-              context: context, builder: (context) => AddTaskScreen());
+              context: context,
+              builder: (context) => AddTaskScreen(
+                    id: null,
+                  ));
         },
         child: const Icon(
           Icons.add,
@@ -86,9 +98,20 @@ class _TasksScreenState extends State<TasksScreen> {
                   topLeft: Radius.circular(20), topRight: Radius.circular(20)),
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TaskList(),
-            ),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: count == 0
+                    ? Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20)),
+                        ),
+                      )
+                    : TaskList()
+                //TaskList(),
+                //
+                ),
           ))
         ],
       ),

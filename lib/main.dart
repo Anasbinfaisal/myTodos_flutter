@@ -1,12 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:to_doey/services/DatabaseHandler.dart';
-import 'models/task.dart';
 import 'screens/tasks_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+final navKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -20,8 +21,49 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: TasksScreen(),
-    );
+        navigatorKey: navKey,
+        debugShowCheckedModeBanner: false,
+        home: AnimatedSplashScreen(
+          backgroundColor: Colors.red,
+          splash: Flex(
+            direction: Axis.vertical,
+            children: [
+              Expanded(
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Image.asset(
+                        'lib/assets/to-do.png',
+                        height: 100,
+                        width: 100,
+                      ),
+                    ),
+                    const Expanded(
+                      flex: 1,
+                      child: Text(
+                        'MyTodos',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 60),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+          nextScreen: TasksScreen(),
+          splashIconSize: 200,
+          splashTransition: SplashTransition.slideTransition,
+          duration: 3000,
+        )
+
+        //TasksScreen()
+
+        );
   }
 }
