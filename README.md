@@ -12,7 +12,7 @@ Here are a few images that demonstrate the application funcitonalities and UI:
   title="Splash Screen"
   style="display: inline-block; margin: 0 auto; max-width: 300px">
   
-!['UI Image'](/images/IMG_20220920_003544.jpg =250x250)
-!['UI Image'](/images/IMG_20220920_003736.jpg =250x250)
-!['UI Image'](/images/IMG_20220920_003824.jpg =250x250)
+!['UI Image'](/images/IMG_20220920_003544.jpg )
+!['UI Image'](/images/IMG_20220920_003736.jpg )
+!['UI Image'](/images/IMG_20220920_003824.jpg )
 
