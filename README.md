@@ -5,9 +5,7 @@ This is a basic todos app with functionalities such as add, removing and updatin
 ## User Interface
 
 Here are a few images that demonstrate the application funcitonalitieis and UI:
-<div align="center">
- ![unnamed](https://github.com/Anasbinfaisal/myTodos_flutter/blob/master/images/IMG_20220920_003903.jpg)
-</div>
+ ![Alt text](/images/IMG_20220920_003903.jpg)
 
 ![alt text] //SplashScreen
 ![alt text]https://github.com/Anasbinfaisal/myTodos_flutter/blob/master/images/IMG_20220920_003544.jpg
