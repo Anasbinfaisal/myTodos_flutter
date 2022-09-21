@@ -2,6 +2,10 @@
 
 This is a basic todos app with functionalities such as adding, removing and updating tasks. The users can also schedule reminders for thier tasks. The backend is written in SQL using the sqlite flutter package.
 
+##Actions
+
+Tasks can be added using the Floating action button. The tasks can be edited by tapping on them in the list. In order to remove the tasks, long press the task in the list until a toast appears.
+
 ## User Interface
 
 Here are a few images that demonstrate the application funcitonalities and UI:
