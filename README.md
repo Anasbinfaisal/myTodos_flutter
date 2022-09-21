@@ -16,13 +16,33 @@ Here are a few images that demonstrate the application funcitonalities and UI:
 <img
   src="/images/IMG_20220920_003903.jpg"
   alt="Splash Screen"
-  title="Splash Screen"
-  style="display: inline-block; margin: 0 auto; max-width: 300px">
+  width="45%" >
+&nbsp; &nbsp; &nbsp; &nbsp;
+<img
+  src="/images/IMG_20220920_003809.jpg"
+  alt="Add Tasks Screen"
+  width="45%"
+height >
+<img
+  src="/images/IMG_20220920_003824.jpg"
+  alt="Add Task Screen 2"
+  width="45%" >
+&nbsp; &nbsp;
+<img
+  src="/images/IMG_20220920_003725.jpg"
+  alt="Task Added"
+  width="45%" >
+<img
+  src="/images/IMG_20220920_003544.jpg"
+  alt="Task Screen"
+  width="45%" >
+<img
+  src="/images/IMG_20220920_003736.jpg"
+  alt="Task Deleted"
+  width="45%" >
+<img
+  src="/images/IMG_20220920_003524.jpg"
+  alt="Task Notification"
+  width="45%" >
   
-!['UI Image'](/images/IMG_20220920_003544.jpg )
-!['UI Image'](/images/IMG_20220920_003736.jpg )
-!['UI Image'](/images/IMG_20220920_003824.jpg )
-!['UI Image'](/images/IMG_20220920_003524.jpg )
-!['UI Image'](/images/IMG_20220920_003725.jpg )
-!['UI Image'](/images/IMG_20220920_003809.jpg )
 
