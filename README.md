@@ -1,6 +1,6 @@
 # MyTodos Flutter Application 
 
-This is a basic todos app with functionalities such as add, removing and updating tasks. The users can also schedule reminders for thier tasks. The backend is written in SQL using the sqlite flutter package.
+This is a basic todos app with functionalities such as adding, removing and updating tasks. The users can also schedule reminders for thier tasks. The backend is written in SQL using the sqlite flutter package.
 
 ## User Interface
 
