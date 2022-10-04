@@ -1,16 +1,48 @@
-# to_doey
+# MyTodos Flutter Application 
 
-A new Flutter project.
+This is a basic todos app with functionalities such as adding, removing and updating tasks. The users can also schedule reminders for thier tasks. The backend is written in SQL using the sqlite flutter package.
 
-## Getting Started
+## Actions
 
-This project is a starting point for a Flutter application.
+- Tasks can be added using the Floating action button. A toast indicates the addition of a task successfully.
+- Reminders can be set for the tasks, with options to repeat and remind about the tasks daily and in 5, 10 minutes respectively.
+- They can be edited by tapping on them in the list.
+- In order to remove the tasks, long press the task in the list until a toast appears.
 
-A few resources to get you started if this is your first Flutter project:
+## User Interface
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Here are a few images that demonstrate the application funcitonalities and UI:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img
+  src="/images/IMG_20220920_003903.jpg"
+  alt="Splash Screen"
+  width="45%" >
+&nbsp; &nbsp; &nbsp; &nbsp;
+<img
+  src="/images/IMG_20220920_003809.jpg"
+  alt="Add Tasks Screen"
+  width="45%"
+height >
+<img
+  src="/images/IMG_20220920_003824.jpg"
+  alt="Add Task Screen 2"
+  width="45%" >
+&nbsp; &nbsp;
+<img
+  src="/images/IMG_20220920_003725.jpg"
+  alt="Task Added"
+  width="45%" >
+<img
+  src="/images/IMG_20220920_003544.jpg"
+  alt="Task Screen"
+  width="45%" >
+<img
+  src="/images/IMG_20220920_003736.jpg"
+  alt="Task Deleted"
+  width="45%" >
+<img
+  src="/images/IMG_20220920_003524.jpg"
+  alt="Task Notification"
+  width="45%" >
+  
+
