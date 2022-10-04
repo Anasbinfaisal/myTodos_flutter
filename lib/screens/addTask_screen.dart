@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
+import 'package:to_doey/constants.dart';
 import 'package:to_doey/models/task.dart';
 import 'package:to_doey/components/input_field.dart';
 import '../app_themes.dart';
@@ -51,6 +52,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   final String _currentTime = DateFormat('hh:mm a').format(DateTime.now());
 
   int _defaultValue = 0;
+  bool to_remind = false;
 
   String _repeatMode = 'Never';
 
@@ -68,8 +70,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     notifyHelper = NotificationHelper();
     notifyHelper.initNotification();
 
-    dateController.text = DateFormat.yMd().format(date);
-    startTimeController.text = _currentTime;
+    // dateController.text = DateFormat.yMd().format(date);
+    dateController.text = kempty_date;
+    startTimeController.text = kempty_date;
     repeatController.text = _repeatMode;
     remindController.text = 'Never';
 
@@ -133,15 +136,30 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     ),
                     Row(
                       children: [
+                        Text('Set Reminder'),
+                        Switch(
+                          activeColor: Colors.red,
+                          value: to_remind,
+                          onChanged: (value) {
+                            setState(() {
+                              to_remind = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
                         Expanded(
                           child: InputField(
+                            enabled: to_remind,
                             textValueController: dateController,
                             node: dateNode,
                             label: 'Date',
-                            hint: '$dateController',
-                            suffixIcon: const Icon(
+                            hint: to_remind ? '$dateController' : kempty_date,
+                            suffixIcon: Icon(
                               FontAwesomeIcons.calendar,
-                              color: Colors.green,
+                              color: to_remind ? Colors.red : Colors.blueGrey,
                             ),
                             onSuffixTap: () {
                               _getDate();
@@ -153,13 +171,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         ),
                         Expanded(
                           child: InputField(
+                            enabled: to_remind,
                             textValueController: startTimeController,
                             node: startTimeNode,
                             label: 'Start time',
-                            hint: _currentTime,
-                            suffixIcon: const Icon(
+                            hint: to_remind ? _currentTime : kempty_date,
+                            suffixIcon: Icon(
                               Icons.watch_later_outlined,
-                              color: Colors.green,
+                              color: to_remind ? Colors.red : Colors.blueGrey,
                             ),
                             onSuffixTap: () {
                               _getTime();
@@ -172,6 +191,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       children: [
                         Expanded(
                           child: InputField(
+                            enabled: to_remind,
                             textValueController: remindController,
                             node: remindNode,
                             label: 'Remind me ',
@@ -188,6 +208,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         ),
                         Expanded(
                           child: InputField(
+                            enabled: to_remind,
                             textValueController: repeatController,
                             node: repeatNode,
                             label: 'Repeat every ',
@@ -285,8 +306,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   }
 
   _uploadTask() async {
-    print(_defaultValue);
-
     Task task = Task(
         name: taskBodyController.text,
         title: taskTitleController.text,
@@ -298,27 +317,18 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
     int value1 = await _taskController.addTask(task: task);
     task.id = value1;
-    print("task id: ${task.id}");
-
-    // Task task1 = await handler.getTask(value1);
-
     setNotifications(task);
-
-    print('upload done - Task id: $value1');
   }
 
   _updateTask() async {
-    print('id ::: ${widget.id}');
-
     Task task = Task(
       id: widget.id,
       name: taskBodyController.text,
       title: taskTitleController.text,
-      date: dateController.text,
-      startTime: startTimeController.text,
+      date: to_remind ? dateController.text : kempty_date,
+      startTime: to_remind ? startTimeController.text : kempty_date,
       remind: _defaultValue,
       repeat: repeatController.text,
-      //todo: set value
       isDone: 0,
     );
 
@@ -336,6 +346,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       taskTitleController.text = task!.title.toString();
       dateController.text = task!.date.toString();
       startTimeController.text = task!.startTime.toString();
+
+      dateController.text == kempty_date ? to_remind = false : to_remind = true;
 
       if (task!.remind.toString() == '0') {
         remindController.text = 'Never';
@@ -361,6 +373,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         date = _pickerDate;
         dateController.text = DateFormat.yMd().format(date);
       });
+    } else {
+      dateController.text = kempty_date;
     }
   }
 
@@ -380,12 +394,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     return showTimePicker(
       initialEntryMode: TimePickerEntryMode.dial,
       context: context,
-      initialTime: TimeOfDay
-          //(
-          // hour: int.parse(_currentTime.split(':')[0]),
-          // minute: int.parse(_currentTime.split(':')[0].split(' ')[0]),
-          //   )
-          .now(),
+      initialTime: TimeOfDay.now(),
     );
   }
 
@@ -402,7 +411,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         value == 'Never'
             ? _defaultValue = 0
             : _defaultValue = int.parse(value!);
-        print("Repeat Mode Value: $value");
 
         setState(() {
           if (value == 'Never') {
@@ -456,106 +464,46 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   }
 
   void setNotifications(Task task) {
-    print('Selected Time is: ${task.startTime}');
+    if (to_remind) {
+      DateTime time = DateFormat.jm().parse(task.startTime.toString());
+      var myTime = DateFormat("HH:mm").format(time);
 
-    DateTime time = DateFormat.jm().parse(task.startTime.toString());
-    var myTime = DateFormat("HH:mm").format(time);
-
-    if (task.repeat == 'Day' ||
-        task.repeat == 'Week' ||
-        task.repeat == 'Month' ||
-        task.repeat == 'Never') {
-      if (task.remind == 0) {
-        notifyHelper.scheduledNotification(
-          hour: int.parse(myTime.toString().split(":")[0]),
-          minute: int.parse(myTime.toString().split(":")[1]),
-          task: task,
-        );
-      } else if (task.remind == 5) {
-        notifyHelper.scheduledNotification(
-          hour: int.parse(myTime.toString().split(":")[0]),
-          minute: int.parse(myTime.toString().split(":")[1]) - 5,
-          task: task,
-        );
-      } else if (task.remind == 10) {
-        notifyHelper.scheduledNotification(
-          hour: int.parse(myTime.toString().split(":")[0]),
-          minute: int.parse(myTime.toString().split(":")[1]) - 10,
-          task: task,
-        );
-      } else if (task.remind == 15) {
-        notifyHelper.scheduledNotification(
-          hour: int.parse(myTime.toString().split(":")[0]),
-          minute: int.parse(myTime.toString().split(":")[1]) - 15,
-          task: task,
-        );
-      } else {
-        notifyHelper.scheduledNotification(
-          hour: int.parse(myTime.toString().split(":")[0]),
-          minute: int.parse(myTime.toString().split(":")[1]) - 20,
-          task: task,
-        );
+      if (task.repeat == 'Day' ||
+          task.repeat == 'Week' ||
+          task.repeat == 'Month' ||
+          task.repeat == 'Never') {
+        if (task.remind == 0) {
+          notifyHelper.scheduledNotification(
+            hour: int.parse(myTime.toString().split(":")[0]),
+            minute: int.parse(myTime.toString().split(":")[1]),
+            task: task,
+          );
+        } else if (task.remind == 5) {
+          notifyHelper.scheduledNotification(
+            hour: int.parse(myTime.toString().split(":")[0]),
+            minute: int.parse(myTime.toString().split(":")[1]) - 5,
+            task: task,
+          );
+        } else if (task.remind == 10) {
+          notifyHelper.scheduledNotification(
+            hour: int.parse(myTime.toString().split(":")[0]),
+            minute: int.parse(myTime.toString().split(":")[1]) - 10,
+            task: task,
+          );
+        } else if (task.remind == 15) {
+          notifyHelper.scheduledNotification(
+            hour: int.parse(myTime.toString().split(":")[0]),
+            minute: int.parse(myTime.toString().split(":")[1]) - 15,
+            task: task,
+          );
+        } else {
+          notifyHelper.scheduledNotification(
+            hour: int.parse(myTime.toString().split(":")[0]),
+            minute: int.parse(myTime.toString().split(":")[1]) - 20,
+            task: task,
+          );
+        }
       }
-      // return Container(
-      //   decoration: const BoxDecoration(
-      //     color: Colors.white,
-      //     borderRadius: BorderRadius.only(
-      //         topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-      //   ),
-      // );
-      // } else if (task?.date == DateFormat.yMd().format(_selectedDate)) {
-      //   if (task?.remind == 5) {
-      //     notifyHelper.scheduledNotification(
-      //       hour: int.parse(myTime.toString().split(":")[0]),
-      //       minute: int.parse(myTime.toString().split(":")[1]) - 5,
-      //       task: task,
-      //     );
-      //   } else if (task?.remind == 10) {
-      //     notifyHelper.scheduledNotification(
-      //       hour: int.parse(myTime.toString().split(":")[0]),
-      //       minute: int.parse(myTime.toString().split(":")[1]) - 10,
-      //       task: task,
-      //     );
-      //   } else if (task?.remind == 15) {
-      //     notifyHelper.scheduledNotification(
-      //       hour: int.parse(myTime.toString().split(":")[0]),
-      //       minute: int.parse(myTime.toString().split(":")[1]) - 15,
-      //       task: task,
-      //     );
-      //   } else {
-      //     notifyHelper.scheduledNotification(
-      //       hour: int.parse(myTime.toString().split(":")[0]),
-      //       minute: int.parse(myTime.toString().split(":")[1]) - 20,
-      //       task: task,
-      //     );
-      //   }
-      // } else if (task?.repeat == 'Never' &&
-      //     task?.date == DateFormat.yMd().format(_selectedDate)) {
-      //   if (task?.remind == 5) {
-      //     notifyHelper.scheduledNotification(
-      //       hour: int.parse(myTime.toString().split(":")[0]),
-      //       minute: int.parse(myTime.toString().split(":")[1]) - 5,
-      //       task: task,
-      //     );
-      //   } else if (task?.remind == 10) {
-      //     notifyHelper.scheduledNotification(
-      //       hour: int.parse(myTime.toString().split(":")[0]),
-      //       minute: int.parse(myTime.toString().split(":")[1]) - 10,
-      //       task: task,
-      //     );
-      //   } else if (task?.remind == 15) {
-      //     notifyHelper.scheduledNotification(
-      //       hour: int.parse(myTime.toString().split(":")[0]),
-      //       minute: int.parse(myTime.toString().split(":")[1]) - 15,
-      //       task: task,
-      //     );
-      //   } else {
-      //     notifyHelper.scheduledNotification(
-      //       hour: int.parse(myTime.toString().split(":")[0]),
-      //       minute: int.parse(myTime.toString().split(":")[1]) - 20,
-      //       task: task,
-      //     );
-      //   }
     }
   }
 }

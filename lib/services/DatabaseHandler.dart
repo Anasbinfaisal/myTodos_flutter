@@ -31,9 +31,9 @@ class DatabaseHandler {
   }
 
   static Future<List<Map<String, dynamic>>> query() async {
-    print('query called');
+
     var list = await _database!.query(_tableName);
-    print(list);
+
     return list;
   }
 
@@ -76,11 +76,6 @@ class DatabaseHandler {
     return result;
   }
 
-  // Future<List<Task>> retrieveTasks() async {
-  //   final Database db = await initializeDB();
-  //   final List<Map<String, Object?>> queryResult = await db.query(_tableName);
-  //   return queryResult.map((e) => Task.fromMap(e)).toList();
-  // }
 
   Future<List<Task>> retrieveTasks_completed() async {
     final Database db = await initializeDB();
@@ -112,40 +107,5 @@ class DatabaseHandler {
     );
   }
 
-  // static Future deleteTask(int id) async {
-  //   print('deleting');
-  //   await _database?.delete(_tableName, where: 'id=?', whereArgs: [id]);
-  // }
-  // Future<Task> getTask_bytitle(String? title) async {
-  //   final Database db = await initializeDB();
-  //   final data = await db.query(
-  //     _tableName,
-  //     where: 'title=?',
-  //     whereArgs: [title],
-  //   );
-  //   return Task.fromMap(data.first);
-  //
-  // }
-  //
-  // static Future<int> insert(Task? task) async {
-  //   print('inserting ${task?.name}');
-  //
-  //   return await _database?.insert(_tableName, task!.toJson()) ?? 1;
-  // }
-
-  // static Future<List<Task>?> retrieveTasks() async {
-  //   final List<Map<String, Object?>>? queryResult =
-  //       await _database?.query('$_tableName');
-  //   return queryResult?.map((e) => Task.fromJson(e)).toList();
-  // }
-  //
-// Future<int> insertTasks(List<Task> tasks) async {
-//   int result = 0;
-//   final Database db = await initializeDB();
-//   for (var task in tasks) {
-//     result = await db.insert('$_tableName', task.toMap());
-//   }
-//   return result;
-// }
 
 }

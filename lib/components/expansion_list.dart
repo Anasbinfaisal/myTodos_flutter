@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:to_doey/components/task_list.dart';
 import 'package:to_doey/components/task_tile.dart';
-
 import '../constants.dart';
 import '../models/task.dart';
-import '../screens/addTask_screen.dart';
 import '../services/DatabaseHandler.dart';
 
 late DatabaseHandler handler = DatabaseHandler();
@@ -76,14 +72,7 @@ class _ExpansionListState extends State<ExpansionList> {
                 ),
               ]);
         } else {
-          return Container(
-              // child: const Center(
-              //   child: Text(
-              //     "No Tasks Added!",
-              //     style: TextStyle(fontSize: 25),
-              //   ),
-              // ),
-              );
+          return Container();
         }
       },
     );

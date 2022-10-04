@@ -14,6 +14,7 @@ class InputField extends StatelessWidget {
   final String? initialValue;
   final Widget? suffixIcon;
   final Function? onSuffixTap;
+  final bool? enabled;
 
   InputField(
       {required this.textValueController,
@@ -25,6 +26,7 @@ class InputField extends StatelessWidget {
       this.onEditComplete,
       this.onValidate,
       this.valueKey,
+      this.enabled,
       required this.hint,
       required this.label,
       required this.node});
@@ -41,7 +43,14 @@ class InputField extends StatelessWidget {
           ),
         ),
         TextFormField(
-          style: TextStyle(fontSize: 12),
+          enabled: enabled,
+          style: TextStyle(
+              fontSize: 12,
+              color: enabled == null
+                  ? Colors.black
+                  : enabled!
+                      ? Colors.black
+                      : Colors.blueGrey),
           maxLines: maxLine,
           readOnly: onSuffixTap == null ? false : true,
           controller: textValueController,

@@ -64,37 +64,25 @@ class NotificationHelper {
   }
 
   displayNotification({required String title, required String content}) async {
-    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'channelId', 'channelName',
         channelDescription: 'channelDescription',
         importance: Importance.max,
-        priority: Priority.high);
+        priority: Priority.high,
+        largeIcon: const DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
+        styleInformation:
+            BigTextStyleInformation(content, contentTitle: title));
 
     var iOSPlatformChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
       iOS: iOSPlatformChannelSpecifics,
     );
+
     flutterLocalNotificationsPlugin.show(
         0, title, content, platformChannelSpecifics,
         payload: 'Default_Sound');
   }
-
-  // Future<void> showLocalNotification({
-  //   required int id,
-  //   required String title,
-  //   required String body,
-  //   required String payload,
-  // }) async {
-  //   final platformChannelSpecifics = await _notificationDetails();
-  //   await _localNotifications.show(
-  //     id,
-  //     title,
-  //     body,
-  //     platformChannelSpecifics,
-  //     payload: payload,
-  //   );
-  // }
 
   scheduledNotification(
       {required int hour, required int minute, required Task task}) async {
@@ -104,11 +92,15 @@ class NotificationHelper {
           task.title,
           task.name,
           _convertTime(hour, minute),
-          const NotificationDetails(
+          NotificationDetails(
             android: AndroidNotificationDetails('channelId', 'channelName',
                 channelDescription: 'channelDescription',
                 importance: Importance.max,
-                priority: Priority.high),
+                priority: Priority.high,
+                largeIcon:
+                    const DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
+                styleInformation: BigTextStyleInformation(task.name!,
+                    contentTitle: task.title!)),
             iOS: IOSNotificationDetails(),
           ),
           uiLocalNotificationDateInterpretation:
