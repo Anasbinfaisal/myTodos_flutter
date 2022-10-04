@@ -2,39 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:to_doey/constants.dart';
-import 'package:to_doey/screens/addTask_screen.dart';
+import 'package:to_doey/components/task_list.dart';
+import 'package:to_doey/components/task_tile.dart';
+
+import '../constants.dart';
+import '../models/task.dart';
+import '../screens/addTask_screen.dart';
 import '../services/DatabaseHandler.dart';
-import 'expansion_list.dart';
-import 'task_tile.dart';
-import 'package:to_doey/models/task.dart';
 
 late DatabaseHandler handler = DatabaseHandler();
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
-class TaskList extends StatefulWidget {
-  const TaskList({Key? key}) : super(key: key);
+bool isExpanded = false;
 
+int? count;
+ScrollController _scrollController = ScrollController();
+
+class ExpansionList extends StatefulWidget {
   @override
-  State<TaskList> createState() => _TaskListState();
+  State<ExpansionList> createState() => _ExpansionListState();
 }
 
-class _TaskListState extends State<TaskList> {
+class _ExpansionListState extends State<ExpansionList> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          ExpansionList(),
-          FutureBuilder(
-            future: handler.retrieveTasks_notcompleted(),
-            builder: (context, AsyncSnapshot<List<Task>?> snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  shrinkWrap: true,
+    return FutureBuilder(
+      future: handler.retrieveTasks_completed(),
+      builder: (context, AsyncSnapshot<List<Task>?> snapshot) {
+        if (snapshot.hasData) {
+          return ExpansionTile(
+              onExpansionChanged: (value) {
+                isExpanded = value;
+              },
+              maintainState: true,
+              title: Text("Completed Tasks (${snapshot.data!.length})"),
+              children: [
+                ListView.builder(
+                  controller: _scrollController,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: snapshot.data?.length,
+                  shrinkWrap: true,
+                  itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     final task = snapshot.data![index];
                     return Task_Tile(
@@ -65,14 +73,19 @@ class _TaskListState extends State<TaskList> {
                       },
                     );
                   },
-                );
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            },
-          ),
-        ],
-      ),
+                ),
+              ]);
+        } else {
+          return Container(
+              // child: const Center(
+              //   child: Text(
+              //     "No Tasks Added!",
+              //     style: TextStyle(fontSize: 25),
+              //   ),
+              // ),
+              );
+        }
+      },
     );
   }
 }

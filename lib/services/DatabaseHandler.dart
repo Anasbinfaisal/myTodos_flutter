@@ -76,9 +76,23 @@ class DatabaseHandler {
     return result;
   }
 
-  Future<List<Task>> retrieveTasks() async {
+  // Future<List<Task>> retrieveTasks() async {
+  //   final Database db = await initializeDB();
+  //   final List<Map<String, Object?>> queryResult = await db.query(_tableName);
+  //   return queryResult.map((e) => Task.fromMap(e)).toList();
+  // }
+
+  Future<List<Task>> retrieveTasks_completed() async {
     final Database db = await initializeDB();
-    final List<Map<String, Object?>> queryResult = await db.query(_tableName);
+    final List<Map<String, Object?>> queryResult =
+        await db.query(_tableName, where: "isDone = 1");
+    return queryResult.map((e) => Task.fromMap(e)).toList();
+  }
+
+  Future<List<Task>> retrieveTasks_notcompleted() async {
+    final Database db = await initializeDB();
+    final List<Map<String, Object?>> queryResult =
+        await db.query(_tableName, where: "isDone = 0");
     return queryResult.map((e) => Task.fromMap(e)).toList();
   }
 

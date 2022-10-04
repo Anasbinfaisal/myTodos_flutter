@@ -59,7 +59,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   Task? task;
   String taskText = '';
-  // ignore: prefer_typing_uninitialized_variables
   var notifyHelper;
 
   TextEditingController? controller = TextEditingController();
@@ -104,6 +103,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               child: Container(
                 padding: const EdgeInsets.all(20),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     InputField(
                       textValueController: taskTitleController,
