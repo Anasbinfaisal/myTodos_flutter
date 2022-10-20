@@ -20,7 +20,7 @@ Here are a few images that demonstrate the application funcitonalities and UI:
 &nbsp; &nbsp; &nbsp; &nbsp;
 
 <img
-  src="/images/AddNewTaskScreen.jpg"
+  src="/images/AddNewTaskScreen.jpeg"
   alt="Add New Task Screen"
   width="45%"
 height >
@@ -48,8 +48,8 @@ height >
   width="45%" > -->
   
   <img
-  src="/images/TasksListScreen.jpg"
-  alt="Add Tasks Screen"
+  src="/images/TasksListScreen.jepg"
+  alt="Tasks List Screen"
   width="45%"
 height >
   
