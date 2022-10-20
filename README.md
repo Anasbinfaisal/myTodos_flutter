@@ -18,24 +18,41 @@ Here are a few images that demonstrate the application funcitonalities and UI:
   alt="Splash Screen"
   width="45%" >
 &nbsp; &nbsp; &nbsp; &nbsp;
+
 <img
+  src="/images/AddNewTaskScreen.jpg"
+  alt="Add New Task Screen"
+  width="45%"
+height >
+
+<!--- <img
   src="/images/IMG_20220920_003809.jpg"
   alt="Add Tasks Screen"
   width="45%"
-height >
+height > 
+
 <img
   src="/images/IMG_20220920_003824.jpg"
   alt="Add Task Screen 2"
-  width="45%" >
+  width="45%" > -->
 &nbsp; &nbsp;
+
 <img
   src="/images/IMG_20220920_003725.jpg"
   alt="Task Added"
   width="45%" >
-<img
+  
+<!--- <img
   src="/images/IMG_20220920_003544.jpg"
   alt="Task Screen"
-  width="45%" >
+  width="45%" > -->
+  
+  <img
+  src="/images/TasksListScreen.jpg"
+  alt="Add Tasks Screen"
+  width="45%"
+height >
+  
 <img
   src="/images/IMG_20220920_003736.jpg"
   alt="Task Deleted"
