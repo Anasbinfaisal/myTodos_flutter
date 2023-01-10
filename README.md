@@ -14,10 +14,16 @@ This is a basic todos app with functionalities such as adding, removing and upda
 Here are a few images that demonstrate the application funcitonalities and UI:
 
 <img
-  src="/images/IMG_20220920_003903.jpg"
+  src="/images/MyTodos Screens.jpg"
   alt="Splash Screen"
   width="45%" >
-
+ &nbsp; &nbsp; &nbsp; &nbsp;
+<img
+  src="/images/AddNewTaskScreen.jpg"
+  alt="Add New Task Screen"
+  width="45%"
+height >
+&nbsp; &nbsp; &nbsp; &nbsp;
 <img
   src="/images/AddNewTaskScreen.jpg"
   alt="Add New Task Screen"
