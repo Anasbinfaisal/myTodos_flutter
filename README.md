@@ -9,6 +9,9 @@ This is a basic todos app with functionalities such as adding, removing and upda
 - They can be edited by tapping on them in the list.
 - In order to remove the tasks, long press the task in the list until a toast appears.
 
+## Application APK Link:
+https://github.com/Anasbinfaisal/myTodos_flutter/blob/master/MyTodos.apk
+
 ## User Interface
 
 Here are a few images that demonstrate the application funcitonalities and UI:
