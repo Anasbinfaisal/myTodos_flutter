@@ -16,12 +16,6 @@ Here are a few images that demonstrate the application funcitonalities and UI:
 <img
   src="/images/MyTodos Screens.jpg"
   alt="Splash Screen" >
- &nbsp; &nbsp; &nbsp; &nbsp;
-<img
-  src="/images/AddNewTaskScreen.jpg"
-  alt="Add New Task Screen"
-  width="45%"
-height >
 &nbsp; &nbsp; &nbsp; &nbsp;
 <img
   src="/images/AddNewTaskScreen.jpg"
